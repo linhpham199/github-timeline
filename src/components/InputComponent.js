@@ -9,8 +9,8 @@ class InputComponent extends Component {
     const { setCurrentUser } = this.props
     return (
       <Row>
-        <Col span={9} />
-        <Col span={6}>
+        <Col span={8} />
+        <Col span={8}>
           <Search
             placeholder="Enter github account"
             enterButton="Search"
@@ -18,7 +18,7 @@ class InputComponent extends Component {
             onSearch={value => setCurrentUser(value)}
           />
         </Col>
-        <Col span={9} />
+        <Col span={8} />
       </Row>
     );
   }

@@ -7,6 +7,7 @@ class TimelineComponent extends Component {
     super(props)
     this.state = {
       user: props.user,
+      repos: props.repos,
     }
   }
 
@@ -16,18 +17,28 @@ class TimelineComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { user } = this.props
+    const { user, repos, fetchAllRepos } = this.props
     if (user !== prevProps.user) {
-      this.onUpdate(user)
+      this.onUpdateUser(user)
+      fetchAllRepos()
+    }
+
+    if (repos !== prevProps.repos) {
+      this.onUpdateRepos(repos)
     }
   }
 
-  onUpdate(user) {
+  onUpdateUser(user) {
     this.setState({ user })
   }
 
+  onUpdateRepos(repos) {
+    this.setState({ repos })
+  }
+
   render() {
-    const { user } = this.state
+    const { user, repos } = this.state
+    console.log(repos)
     return (
       <div>
         This is timeline of {user}
@@ -44,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   user: state.user.account,
+  repos: state.repos.reposList,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineComponent);
