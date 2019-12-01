@@ -21,9 +21,10 @@ export default function fetchRepos() {
 
   return (dispatch, getState) => {
     const gitAccount = getState().user.account
-    console.log(`${API}${USERS}${gitAccount}${REPOS}`)
+    const URL = `${API}${USERS}/${gitAccount}${REPOS}?sort=created`
+    const token = `Bearer ${process.env.REACT_APP_GIT_TOKEN}`
 
-    axios(`${API}${USERS}/${gitAccount}${REPOS}?sort=created`)
+    axios.get(URL, { headers: { Authorization: token } })
       .then(response => {
         console.log(response.data)
         dispatch(fetchReposOK())
